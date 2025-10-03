@@ -15,7 +15,7 @@ export const useCountrycode = () => {
       const countriesObj = jsonData.map((country) => ({
         name: country?.name?.common,
         code: country?.cca2,
-        dialCode: country.idd.root
+        dialCode: country?.idd?.root
           ? `${country.idd.root}${
               country.idd.suffixes ? country.idd.suffixes[0] : ""
             }`

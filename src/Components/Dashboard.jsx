@@ -1,8 +1,11 @@
+import Chatroom from "./Chatroom"
 
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+        <Chatroom/>
+    </div>
   )
 }
 
