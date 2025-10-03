@@ -1,9 +1,12 @@
+import Body from "./Components/Body"
+import { useCountrycode } from "./CustomHooks/useCountrycode"
 
 
 function App() {
+  useCountrycode();
  return (
-  <div className='text-center font-bold text-4xl'>
-    <h1>Gemini</h1>
+  <div>
+    <Body/>
   </div>
  )
 }
