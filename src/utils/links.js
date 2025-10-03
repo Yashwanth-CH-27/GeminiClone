@@ -1,1 +1,0 @@
-export const GROQ_API_KEY="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"

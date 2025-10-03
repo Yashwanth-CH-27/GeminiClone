@@ -16,8 +16,7 @@ const Chatroom = () => {
       serachText.current.value = ""
       setResponse(chatCompletion.choices[0]?.message?.content || "");
     } catch (error) {
-      console.error("Error fetching response:", error);
-      return "Error fetching response";
+      console.log(error)
     }
   };
   return (
