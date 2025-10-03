@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import dataReducer from "./dataSlice"
 
 const appStore = configureStore({
-    reducers: {
+    reducer: {
        APIdata : dataReducer
     }
 })

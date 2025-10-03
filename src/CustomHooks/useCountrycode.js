@@ -1,6 +1,10 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addData } from "../utils/dataSlice";
 
 export const useCountrycode = () => {
+  const dispatch = useDispatch()
+  const countryData = useSelector(store => store.APIdata.countryCodeData)
   const getCountrycodeData = async () => {
     try {
       const data = await fetch(
@@ -17,12 +21,14 @@ export const useCountrycode = () => {
             }`
           : "",
       }));
-      console.log(countriesObj);
+    //   console.log(countriesObj);
+    dispatch(addData(countriesObj))
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    getCountrycodeData();
-  }, []);
+    if(!countryData) getCountrycodeData();
+  }, [countryData]);
+//   return countryData;
 };
