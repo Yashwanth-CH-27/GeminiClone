@@ -1,37 +1,42 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OtpPage = () => {
   const navigate = useNavigate();
-  const [message, setMessage] = useState("");
   const enteredOTP = useRef("");
 
   const [generatedOtp] = useState(() =>
     Math.floor(100000 + Math.random() * 900000)
   );
-  console.log(generatedOtp);
+  console.log("Generated OTP:", generatedOtp);
 
   const handleValidation = () => {
     if (parseInt(enteredOTP.current.value) === generatedOtp) {
-      setMessage("✅ OTP verification successful!");
+      toast.success("OTP verification successful!", {
+        position: "top-center",
+        autoClose: 2000,
+      });
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);
     } else {
-      setMessage("❌ Incorrect OTP, try again!");
+      toast.error("Incorrect OTP, try again!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
   return (
     <div className="flex flex-col justify-center items-center w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%] mx-auto my-10 sm:my-16 md:my-20 bg-gray-100 rounded-2xl shadow-md min-h-[50vh] p-4 sm:p-6 md:p-8">
-      {/* Header */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700">
           OTP was sent to your phone number!
         </h1>
       </div>
 
-      {/* Input */}
       <div className="w-full sm:w-10/12 md:w-8/12">
         <input
           ref={enteredOTP}
@@ -41,7 +46,6 @@ const OtpPage = () => {
         />
       </div>
 
-      {/* Button */}
       <div className="my-6 sm:my-8">
         <button
           onClick={handleValidation}
@@ -51,16 +55,7 @@ const OtpPage = () => {
         </button>
       </div>
 
-      {/* Message */}
-      {message && (
-        <p
-          className={`m-2 text-sm sm:text-base font-medium ${
-            message.includes("success") ? "text-green-600" : "text-red-600"
-          }`}
-        >
-          {message}
-        </p>
-      )}
+      <ToastContainer />
     </div>
   );
 };
