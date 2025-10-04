@@ -5,13 +5,16 @@ const Chatroom = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState(null);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   const inputRef = useRef();
   const chatContainerRef = useRef();
   const chatEndRef = useRef(null);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages, loading]);
+
   const handleScroll = () => {
     const container = chatContainerRef.current;
     if (!container) return;
@@ -39,6 +42,8 @@ const Chatroom = () => {
   const getPreciseResponse = async () => {
     const userMessage = inputRef.current.value.trim();
     if (!userMessage) return;
+
+    if (showWelcome) setShowWelcome(false);
 
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     inputRef.current.value = "";
@@ -77,12 +82,18 @@ const Chatroom = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen relative">
+    <div className="flex flex-col w-10/12 mx-auto h-screen relative">
       <div
         ref={chatContainerRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto p-4 bg-gray-50"
+        className="flex-1 overflow-y-auto p-4 bg-gray-50 relative"
       >
+        {showWelcome && messages.length === 0 && (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-gray-500 font-bold text-xl bg-blue-200 p-5 rounded-3xl">
+            ✨ What's on your mind today? Ask me anything!
+          </div>
+        )}
+
         {messages.map((msg, idx) => (
           <div
             key={idx}
@@ -114,7 +125,7 @@ const Chatroom = () => {
       {showScrollBtn === "bottom" && (
         <button
           onClick={scrollToBottom}
-          className="absolute left-1/2 bottom-20 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
+          className="absolute left-1/2 bottom-30 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
         >
           ↓
         </button>
@@ -122,13 +133,13 @@ const Chatroom = () => {
       {showScrollBtn === "top" && (
         <button
           onClick={scrollToTop}
-          className="absolute left-1/2 bottom-20 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
+          className="absolute left-1/2 bottom-30 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
         >
           ↑
         </button>
       )}
 
-      <div className="flex items-center p-4 border-t border-gray-300 bg-white">
+      <div className="flex items-center mb-10 p-4 border-t border-gray-300 bg-white">
         <input
           ref={inputRef}
           type="text"
