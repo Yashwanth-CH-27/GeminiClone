@@ -19,10 +19,7 @@ const Chatroom = () => {
     const container = chatContainerRef.current;
     if (!container) return;
 
-    const scrollTop = container.scrollTop;
-    const scrollHeight = container.scrollHeight;
-    const clientHeight = container.clientHeight;
-
+    const { scrollTop, scrollHeight, clientHeight } = container;
     const nearTop = scrollTop < 50;
     const nearBottom = scrollTop + clientHeight > scrollHeight - 50;
 
@@ -82,18 +79,21 @@ const Chatroom = () => {
   };
 
   return (
-    <div className="flex flex-col w-10/12 mx-auto h-screen relative">
+    <div className="flex flex-col w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] mx-auto h-[90vh] bg-white rounded-2xl shadow-md overflow-hidden">
+      {/* Chat Container */}
       <div
         ref={chatContainerRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto p-4 bg-gray-50 relative"
+        className="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 relative"
       >
+        {/* Welcome Message */}
         {showWelcome && messages.length === 0 && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-gray-500 font-bold text-xl bg-blue-200 p-5 rounded-3xl">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-gray-600 font-medium text-sm sm:text-base bg-blue-100 px-6 py-4 rounded-2xl shadow-sm w-[90%] sm:w-auto">
             ✨ What's on your mind today? Ask me anything!
           </div>
         )}
 
+        {/* Messages */}
         {messages.map((msg, idx) => (
           <div
             key={idx}
@@ -102,8 +102,10 @@ const Chatroom = () => {
             }`}
           >
             <div
-              className={`px-4 py-3 rounded-xl shadow-sm max-w-[70%] whitespace-pre-line ${
-                msg.role === "user" ? "bg-blue-100" : "bg-white"
+              className={`px-4 py-3 rounded-xl shadow-sm max-w-[85%] sm:max-w-[70%] whitespace-pre-line text-sm sm:text-base ${
+                msg.role === "user"
+                  ? "bg-blue-100 text-gray-800"
+                  : "bg-white text-gray-700"
               }`}
             >
               {msg.content}
@@ -111,9 +113,10 @@ const Chatroom = () => {
           </div>
         ))}
 
+        {/* Loading */}
         {loading && (
           <div className="mb-4 flex justify-start">
-            <div className="px-4 py-3 rounded-xl shadow-sm bg-white">
+            <div className="px-4 py-3 rounded-xl shadow-sm bg-white text-gray-500 text-sm sm:text-base">
               ✨ Gemini is thinking...
             </div>
           </div>
@@ -122,30 +125,26 @@ const Chatroom = () => {
         <div ref={chatEndRef}></div>
       </div>
 
-      {showScrollBtn === "bottom" && (
+      {/* Scroll Buttons */}
+      {showScrollBtn && (
         <button
-          onClick={scrollToBottom}
-          className="absolute left-1/2 bottom-30 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
+          onClick={
+            showScrollBtn === "bottom" ? scrollToBottom : scrollToTop
+          }
+          className="fixed bottom-24 sm:bottom-20 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
         >
-          ↓
-        </button>
-      )}
-      {showScrollBtn === "top" && (
-        <button
-          onClick={scrollToTop}
-          className="absolute left-1/2 bottom-30 transform -translate-x-1/2 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
-        >
-          ↑
+          {showScrollBtn === "bottom" ? "↓" : "↑"}
         </button>
       )}
 
-      <div className="flex items-center mb-10 p-4 border-t border-gray-300 bg-white">
+      {/* Input Section */}
+      <div className="flex items-center p-3 sm:p-4 border-t border-gray-300 bg-white">
         <input
           ref={inputRef}
           type="text"
           placeholder="Ask Gemini..."
           disabled={loading}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg mr-2 focus:outline-none focus:ring focus:ring-blue-300 disabled:bg-gray-100"
+          className="flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-lg mr-2 focus:outline-none focus:ring-2 focus:ring-blue-300 disabled:bg-gray-100 text-sm sm:text-base"
           onKeyDown={(e) =>
             e.key === "Enter" && !loading && getPreciseResponse()
           }
@@ -153,7 +152,7 @@ const Chatroom = () => {
         <button
           onClick={getPreciseResponse}
           disabled={loading}
-          className={`px-4 py-2 rounded-lg text-white ${
+          className={`px-4 sm:px-6 py-2 rounded-lg text-white font-medium text-sm sm:text-base transition ${
             loading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-blue-500 hover:bg-blue-600"
