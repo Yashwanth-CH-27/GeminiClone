@@ -27,35 +27,6 @@ A sleek and responsive web application that replicates the core functionality of
 
 ---
 
-## Project Structure
-├── node_modules/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Body.jsx
-│   │   ├── Chatroom.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Header.jsx
-│   │   ├── LoginPage.jsx
-│   │   └── OtpPage.jsx
-│   ├── CustomHooks/
-│   │   └── useCountrycode.js
-│   ├── utils/
-│   │   ├── appStore.js
-│   │   ├── dataSlice.js
-│   │   └── groqAi.js
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .env
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package-lock.json
-├── package.json
-├── README.md
-└── vite.config.js
----
 
 ## Setup and Installation
 
