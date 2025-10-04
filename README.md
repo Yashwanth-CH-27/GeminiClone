@@ -1,20 +1,82 @@
-<<<<<<< HEAD
-# React + Vite
+# Gemini Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and responsive web application that replicates the core functionality of a conversational AI assistant, inspired by Google's Gemini. This project is built with **React**, **Vite**, and **Tailwind CSS**, and uses **Redux Toolkit** for state management and **React Router** for navigation. The AI-powered chat is integrated using the **Groq API**.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **User Authentication**: A simple login flow with OTP (One-Time Password) verification.
+* **Country Code Selector**: A dropdown menu on the login page dynamically fetches and displays a list of country codes using the `restcountries.com` API.
+* **AI Chat Interface**: A clean and modern chatroom UI where users can interact with an AI model.
+* **Real-time Responses**: The app uses the Groq SDK to send user queries to an AI model and display responses in real-time.
+* **Responsive Design**: The application's layout is optimized for a seamless experience on various screen sizes, from mobile devices to desktops.
+* **State Management**: Redux Toolkit is used to efficiently manage global state, such as country code data.
+* **Navigation**: React Router is implemented for smooth, client-side routing between the login, OTP, and dashboard pages.
+* **Toast Notifications**: Provides user feedback with toast notifications for various actions, like login success or OTP errors.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
 
-## Expanding the ESLint configuration
+* **React**: A JavaScript library for building user interfaces.
+* **Vite**: A fast build tool for modern web development.
+* **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+* **React Router DOM**: Declarative routing for React.
+* **Redux Toolkit**: The official, opinionated, batteries-included toolset for efficient Redux development.
+* **Groq SDK**: The official SDK to interact with Groq's API for AI functionalities.
+* **`react-toastify`**: A library to add toast notifications to the app.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# GeminiClone-Frontend
->>>>>>> b6b23b38d803942293ed04bafb1dcf541fe7d999
+---
+
+## Project Structure
+├── node_modules/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Body.jsx
+│   │   ├── Chatroom.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── Header.jsx
+│   │   ├── LoginPage.jsx
+│   │   └── OtpPage.jsx
+│   ├── CustomHooks/
+│   │   └── useCountrycode.js
+│   ├── utils/
+│   │   ├── appStore.js
+│   │   ├── dataSlice.js
+│   │   └── groqAi.js
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .env
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
+---
+
+## Setup and Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [repository-url]
+    cd gemini-clone
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Set up the environment variables:**
+    * Create a `.env` file in the root directory.
+    * Get an API key from [Groq](https://groq.com/).
+    * Add your API key to the `.env` file:
+    ```
+    VITE_GROQ_API_KEY=your_groq_api_key_here
+    ```
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:5173`.
