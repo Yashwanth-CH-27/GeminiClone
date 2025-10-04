@@ -51,3 +51,11 @@ A sleek and responsive web application that replicates the core functionality of
     npm run dev
     ```
     The application will be available at `http://localhost:5173`.
+    
+---
+
+## Live Demo
+
+You can view a live, deployed version of the application here:
+
+[![Vercel Deploy](https://vercel.com/button)](https://gemini-clone-kohl-seven.vercel.app/)
