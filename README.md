@@ -51,7 +51,7 @@ A sleek and responsive web application that replicates the core functionality of
     npm run dev
     ```
     The application will be available at `http://localhost:5173`.
-    
+**Note:** For the OTP verification, you must open your browser's developer tools and check the **console log** to find the randomly generated OTP.
 ---
 
 ## Live Demo
